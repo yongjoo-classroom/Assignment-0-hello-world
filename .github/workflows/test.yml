@@ -29,5 +29,9 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test
       run: |
-        echo "Testing submission..."
-        python3 -c "from main import main; assert main() == 'Hello, World!'"
+        echo "Testing student submission..."
+        output=$(python3 main.py)
+        if [ "$output" != "Hello, World!" ]; then
+          echo "Test failed: Expected output 'Hello, World!', got '$output'"
+          exit 1
+        fi
